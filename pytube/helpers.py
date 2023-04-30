@@ -256,8 +256,9 @@ def target_directory(output_path: Optional[str] = None) -> str:
 
 
 def install_proxy(proxy_handler: Dict[str, str]) -> None:
+    auth = request.HTTPBasicAuthHandler()
     proxy_support = request.ProxyHandler(proxy_handler)
-    opener = request.build_opener(proxy_support)
+    opener = request.build_opener(proxy, auth, request.HTTPHandler)
     request.install_opener(opener)
 
 
